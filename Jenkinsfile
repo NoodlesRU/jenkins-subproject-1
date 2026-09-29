@@ -1,10 +1,16 @@
 pipeline {
-    agent { docker { image 'node:24.21.0-alpine3.24' } }
+    agent any
 
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'node --version'
+                bat 'docker run --rm node:24.21.0-alpine3.24 node --version'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'docker run --rm node:24.21.0-alpine3.24 npm --version'
             }
         }
     }
